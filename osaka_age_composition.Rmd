@@ -64,7 +64,7 @@ for (i in 3:length(districts)) {
 
 ```{r}
 data_all <- bind_rows(data_list)
-write.csv(data_all, file = "osaka_age_composition.csv")
+write.csv(data_all, file = "osaka_age_composition.csv", row.names = FALSE)
 ```
 
 書き出したものは、https://github.com/yutannihilation/osaka_age_composition に置きました。
