@@ -46,13 +46,19 @@ download.file(url, tmp)
 ```{r, warning = FALSE, message = FALSE, results = "hide"}
 data_list <- list()
 
+# 使うのは3枚目のシート以降
 for (i in 3:length(districts)) {
   district <- districts[i]
+  
+  # 上3行のデータはスキップ。列名は自分で設定する。
   data_part <- read_excel(tmp, sheet = district, skip = 3, col_names = FALSE)
   names(data_part) <- c("age", "total", "male", "female")
 
+  # 100歳以上は「100～」にまとめられている。
+  # 下でas.numericできないものはfilterしてしまうので、数字にしておく
   data_part[data_part$age == "100～", "age"] <- "100"
   
+  # 「X～Y」になっているものは、as.numeric(age)がNAになる。
   data_list[[district]] <- data_part %>%
     mutate(age = as.numeric(age),
            district = district) %>%
