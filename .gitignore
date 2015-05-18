@@ -15,3 +15,4 @@ vignettes/*.pdf
 # Rmarkdown
 *.html
 cache
+.Rproj.user
